@@ -1,0 +1,32 @@
+exportToExcell() {
+    // const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(this.table.nativeElement);
+    // const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    // XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+  
+    // /* save to file */
+    // XLSX.writeFile(wb, 'SearchSWAP.xlsx');
+    
+    this.openExcel();
+    return;
+    this.displayedExcelData = [];
+    
+    for(let i=0; i<this.swapSearchData.length; i++){
+        this.displayedExcelData[i] = [];
+        this.displayedExcelData[i].push(this.swapSearchData[i].swapNumber); 
+        this.displayedExcelData[i].push(this.swapSearchData[i].swapTypeDesc);
+        this.displayedExcelData[i].push(this.swapSearchData[i].swapStatus);
+        this.displayedExcelData[i].push(this.datePipe.transform(this.swapSearchData[i].creationDate, 'dd/MM/yyyy HH:mm:ss'));
+        this.displayedExcelData[i].push(this.swapSearchData[i].customerNumber); 
+        this.displayedExcelData[i].push(this.swapSearchData[i].customerName);
+        this.displayedExcelData[i].push(this.swapSearchData[i].contactPhone);
+        this.displayedExcelData[i].push(this.swapSearchData[i].orgName);
+        this.displayedExcelData[i].push(this.swapSearchData[i].deliveryOrgName);
+        this.displayedExcelData[i].push(this.swapSearchData[i].companyHeb); 
+        this.displayedExcelData[i].push(this.swapSearchData[i].origionCompany);
+        this.displayedExcelData[i].push(this.swapSearchData[i].model);
+        this.displayedExcelData[i].push(this.swapSearchData[i].serialNumber);
+    }
+
+    // console.log("displayedExcelData: ", this.displayedExcelData);
+    this.excelService.generateExcel(this.displayedTitleColumns, this.displayedExcelData, this.translation.title);
+  }
